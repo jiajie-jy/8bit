@@ -60,7 +60,10 @@ function send(obj) {
 }
 
 function connect() {
-  const endpoint = window.GAME_WS_URL || `${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}`;
+  const local = ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+  const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const defaultPath = local ? '' : '/api/game';
+  const endpoint = window.GAME_WS_URL || `${protocol}//${location.host}${defaultPath}`;
   const url = new URL(endpoint);
   if (new URLSearchParams(location.search).has('host')) url.searchParams.set('host', '1');
   ws = new WebSocket(url);

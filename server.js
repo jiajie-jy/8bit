@@ -357,10 +357,10 @@ setInterval(() => {
   }
 }, TICK_MS);
 
-detectMainIP();
-setInterval(detectMainIP, 30000);
-
-server.listen(PORT, '0.0.0.0', async () => {
+if (!process.env.VERCEL) {
+  detectMainIP();
+  setInterval(detectMainIP, 30000);
+  server.listen(PORT, '0.0.0.0', async () => {
   await new Promise(r => setTimeout(r, 300));   // da tiempo a detectar la IP principal
   const ips = lanIPs();
   console.log('\n  ==========================================');
@@ -371,5 +371,8 @@ server.listen(PORT, '0.0.0.0', async () => {
   console.log('  ALUMNOS abren en su navegador:');
   if (ips.length) ips.forEach(ip => console.log(`     http://${ip}:${PORT}`));
   else console.log('     (no se ha encontrado ninguna IP de red)');
-  console.log('\n  Pulsa Ctrl+C para cerrar el servidor.\n');
-});
+    console.log('\n  Pulsa Ctrl+C para cerrar el servidor.\n');
+  });
+}
+
+module.exports = { server };
