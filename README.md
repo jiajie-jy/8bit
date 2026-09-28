@@ -24,4 +24,4 @@ Están al principio de `server.js`: `MAX_SHOTS`, `MAX_HP`, `SPEED`, `ZONE_DELAY`
 
 Vercel sirve la página y el WebSocket de la partida en `/api/game`. El soporte de WebSockets de Vercel está en beta y la conexión puede cerrarse al alcanzar el límite de duración de la función.
 
-Despliega el repositorio en Vercel y abre la dirección del profesor con `?host=1`. Los jugadores entran en la dirección normal. En local sigue funcionando con `npm start` en el puerto 3000.
+Despliega el repositorio en Vercel y comparte una única dirección. El primer ordenador que entre será el profesor; los siguientes verán la pantalla para unirse como jugadores. En local sigue funcionando con `npm start` en el puerto 3000.

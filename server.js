@@ -293,8 +293,10 @@ const wss = new WebSocketServer({ server, maxPayload: 1024 });
 
 wss.on('connection', (ws, req) => {
   const addr = req.socket.remoteAddress || '';
-  const isHost = ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(addr) ||
-    new URL(req.url, 'http://localhost').searchParams.get('host') === '1';
+  const localHost = ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(addr);
+  const explicitHost = new URL(req.url, 'http://localhost').searchParams.get('host') === '1';
+  const hostConnected = [...players.values()].some(other => other.isHost && other.ws.readyState !== 3);
+  const isHost = localHost || explicitHost || !hostConnected;
   const p = {
     id: nextId++, ws, name: '', joined: false, isHost,
     color: COLORS[colorIdx++ % COLORS.length],
