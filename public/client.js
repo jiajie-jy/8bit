@@ -558,5 +558,7 @@ function drawOverlay(m) {
   }
 }
 
+showScreen(new URLSearchParams(location.search).has('host') ? 'game' : 'join');
+$('#offline').hidden = false;
 connect();
 render();
