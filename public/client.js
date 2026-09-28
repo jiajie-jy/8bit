@@ -93,10 +93,11 @@ function onWelcome(m) {
 
   const list = $('#addrList');
   list.replaceChildren();
-  const ips = m.ips.length ? m.ips : [location.hostname];
+  const hosted = location.protocol === 'https:';
+  const ips = hosted ? [location.host] : (m.ips.length ? m.ips : [location.hostname]);
   for (const ip of ips) {
     const d = document.createElement('div');
-    d.textContent = `${ip}:${m.port}`;
+    d.textContent = hosted ? `https://${ip}` : `${ip}:${m.port}`;
     list.appendChild(d);
   }
 
