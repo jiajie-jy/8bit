@@ -64,7 +64,7 @@ function connect() {
   const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
   const endpoint = local
     ? `${protocol}//${location.host}`
-    : (window.GAME_WS_URL || 'wss://8bits-battle.onrender.com');
+    : `${protocol}//${location.host}/api/game`;
   const url = new URL(endpoint);
   if (new URLSearchParams(location.search).has('host')) url.searchParams.set('host', '1');
   ws = new WebSocket(url);
