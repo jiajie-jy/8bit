@@ -20,3 +20,12 @@ WASD/flechas para moverte · ratón para apuntar · clic o espacio para disparar
 
 ## Ajustes
 Están al principio de `server.js`: `MAX_SHOTS`, `MAX_HP`, `SPEED`, `ZONE_DELAY`, `PORT` y el mapa (`MAP`).
+## Publicar en Vercel
+
+Vercel sirve la web estática; el servidor de la partida necesita un servicio Node persistente con WebSockets. El archivo `render.yaml` permite crear ese servicio en Render desde este repositorio.
+
+1. En Render, crea un Blueprint desde este repositorio y espera a que el servicio `8bits-battle` termine el despliegue. Copia su URL pública, por ejemplo `https://8bits-battle.onrender.com`.
+2. En Vercel, importa el mismo repositorio y define la variable de entorno `GAME_WS_URL` con la URL WebSocket del servicio: `wss://8bits-battle.onrender.com`.
+3. Despliega o vuelve a desplegar Vercel. Para abrir el panel del profesor añade `?host=1` a la dirección; los jugadores entran en la URL normal.
+
+Render admite WebSockets y termina TLS delante de la app, por eso la URL pública debe usar `wss://`. El plan gratuito puede dormir tras un periodo sin tráfico y tardará en despertar al recibir conexiones.

@@ -60,7 +60,10 @@ function send(obj) {
 }
 
 function connect() {
-  ws = new WebSocket(`ws://${location.host}`);
+  const endpoint = window.GAME_WS_URL || `${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}`;
+  const url = new URL(endpoint);
+  if (new URLSearchParams(location.search).has('host')) url.searchParams.set('host', '1');
+  ws = new WebSocket(url);
   ws.onopen = () => { $('#offline').hidden = true; };
   ws.onmessage = e => {
     const m = JSON.parse(e.data);
