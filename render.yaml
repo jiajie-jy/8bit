@@ -3,5 +3,6 @@ services:
     name: 8bits-battle
     runtime: node
     plan: free
+    numInstances: 1
     buildCommand: npm install
     startCommand: npm start

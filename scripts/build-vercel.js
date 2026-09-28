@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const endpoint = process.env.GAME_WS_URL || '';
+const endpoint = process.env.GAME_WS_URL || 'wss://8bits-battle.onrender.com';
 if (endpoint && !/^wss:\/\//i.test(endpoint)) {
   throw new Error('GAME_WS_URL debe ser una URL wss:// del servidor del juego.');
 }

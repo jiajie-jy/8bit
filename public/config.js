@@ -1,2 +1,2 @@
-// Para despliegue estático, scripts/build-vercel.js sustituye esta URL.
-window.GAME_WS_URL = '';
+// En Vercel se sustituye durante la compilación por la URL de Render.
+window.GAME_WS_URL = 'wss://8bits-battle.onrender.com';
